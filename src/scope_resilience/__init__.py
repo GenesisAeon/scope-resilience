@@ -5,6 +5,7 @@ quantification: a formal pre-flight risk assessment before LLM initialisation
 on a semantic path.
 """
 
+import scope_resilience._profiles as _profiles  # noqa: F401
 from scope_resilience.constants import (
     DOMAIN_CONFIG,
     GAMMA_DOT_CRITICAL,

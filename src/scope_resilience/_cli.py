@@ -12,6 +12,23 @@ app = typer.Typer(name="scope-resilience", add_completion=False)
 console = Console()
 
 
+@app.command("serve")
+def serve(
+    port: int = typer.Option(8765, help="Port for the MCP server"),
+) -> None:
+    """Start the MCP server (requires scope-resilience[mcp] to be installed)."""
+    try:
+        from scope_resilience.mcp_server import serve as _serve
+    except ImportError:
+        console.print(
+            "[red]MCP server requires fastmcp. "
+            "Install with: pip install 'scope-resilience[mcp]'[/red]"
+        )
+        raise typer.Exit(1) from None
+    console.print(f"Starting MCP server on port {port}...")
+    _serve(port=port)
+
+
 @app.command("assess")
 def assess(
     topic: str = typer.Argument(..., help="Semantic topic to assess"),
