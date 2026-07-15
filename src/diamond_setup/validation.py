@@ -10,6 +10,7 @@ from diamond_setup.protocol import (
     DiamondPackage,
     NotConvergedError,
     UTACState,
+    ZenodoCreator,
     ZenodoRecord,
 )
 
@@ -110,7 +111,7 @@ def validate_model_shapes() -> list[str]:
         zen = ZenodoRecord(
             title="t",
             description="d",
-            creators=[{"name": "Test"}],
+            creators=[ZenodoCreator(name="Test")],
         )
         if set(zen.as_dict()) >= ZENODO_KEYS:
             pass
