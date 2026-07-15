@@ -1,9 +1,11 @@
 """Tests for HallucinationRisk Ρ_sem computation."""
 
 import math
+
 import pytest
+
+from scope_resilience.constants import GAMMA_MAX, SIGMA
 from scope_resilience.hallucination_risk import HallucinationRisk
-from scope_resilience.constants import SIGMA, GAMMA_MAX
 
 
 @pytest.fixture

@@ -1,6 +1,7 @@
 """Tests for GroundingRecommender."""
 
 import pytest
+
 from scope_resilience.grounding import GroundingRecommender
 from scope_resilience.semantic_path import SemanticPath
 

@@ -1,6 +1,7 @@
 """Diamond interface compliance tests for ScopeResilience."""
 
 import pytest
+
 from diamond_setup.protocol import NotConvergedError
 from diamond_setup.validation import validate_diamond_instance
 from scope_resilience.system import ScopeResilience
@@ -48,7 +49,8 @@ def test_phase_events_list(sr):
 def test_zenodo_record_keys(sr):
     record = sr.to_zenodo_record()
     assert set(record) >= {"title", "description", "creators"}
-    assert "scope-resilience" in record["title"].lower() or "hallucination" in record["title"].lower()
+    title = record["title"].lower()
+    assert "scope-resilience" in title or "hallucination" in title
 
 
 def test_resilience_state_after_cycle(sr):

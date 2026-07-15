@@ -1,9 +1,11 @@
 """Tests for SemanticUTAC."""
 
 import math
+
 import pytest
-from scope_resilience.semantic_utac import SemanticUTAC
+
 from scope_resilience.constants import SIGMA
+from scope_resilience.semantic_utac import SemanticUTAC
 
 
 def test_attractor_at_zero_gamma():

@@ -1,8 +1,9 @@
 """Tests for SemanticCREP."""
 
-import math
-import pytest
 import warnings
+
+import pytest
+
 from scope_resilience.semantic_crep import SemanticCREP
 
 

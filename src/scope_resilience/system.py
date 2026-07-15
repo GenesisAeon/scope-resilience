@@ -8,8 +8,6 @@ from __future__ import annotations
 
 from typing import Any
 
-import numpy as np
-
 from diamond_setup.protocol import (
     CREPState,
     DiamondPackage,
@@ -200,7 +198,7 @@ class ScopeResilience(DiamondPackage):
         If no path meets the threshold the best available path is returned
         with a warning attached in grounding_recommendations.
         """
-        result = self.run_cycle(topic)
+        self.run_cycle(topic)
         path = self._current_path
         if path is None:
             return None

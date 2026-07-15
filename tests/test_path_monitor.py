@@ -1,8 +1,9 @@
 """Tests for PathDriftMonitor."""
 
 import pytest
-from scope_resilience.path_monitor import PathDriftMonitor
+
 from scope_resilience.constants import GAMMA_DOT_CRITICAL
+from scope_resilience.path_monitor import PathDriftMonitor
 
 
 def test_no_drift_with_one_sample():

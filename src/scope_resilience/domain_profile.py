@@ -45,7 +45,7 @@ class DomainProfile:
         rho_target: float,
         sigma: float = 2.2,
         gamma_max: float = 0.920,
-    ) -> "DomainProfile":
+    ) -> DomainProfile:
         """Compute r_required analytically from an atlas target Ρ.
 
         r_required = Ρ_target / (tanh²(σ·Γ) · (1 − Γ/Γ_max))

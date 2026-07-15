@@ -1,9 +1,11 @@
 """Tests for DomainProfile."""
 
 import math
+
 import pytest
+
+from scope_resilience.constants import GAMMA_MAX, SIGMA
 from scope_resilience.domain_profile import DomainProfile
-from scope_resilience.constants import SIGMA, GAMMA_MAX
 
 
 def test_default_profile():
