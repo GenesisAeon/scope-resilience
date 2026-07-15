@@ -34,7 +34,7 @@ if _HAS_MCP:
     @mcp.tool()
     def get_semantic_path(
         topic: str, min_rho: float = 0.4, domain: str = "general"
-    ) -> dict:
+    ) -> dict[str, object]:
         """Return a semantic path for LLM initialisation with resilience metrics."""
         sr = ScopeResilience(domain=domain)
         path = sr.get_semantic_path(topic, min_rho=min_rho)
@@ -53,7 +53,7 @@ if _HAS_MCP:
         }
 
     @mcp.tool()
-    def assess_hallucination_risk(topic: str, domain: str = "general") -> dict:
+    def assess_hallucination_risk(topic: str, domain: str = "general") -> dict[str, object]:
         """Quickly assess hallucination risk for a topic."""
         sr = ScopeResilience(domain=domain)
         result = sr.run_cycle(topic)
@@ -73,7 +73,7 @@ if _HAS_MCP:
         return sr.to_llms_txt(topic)
 
     @mcp.tool()
-    def list_domain_resilience() -> dict:
+    def list_domain_resilience() -> dict[str, dict[str, object]]:
         """Return calibrated resilience values for all GenesisAeon domains."""
         return {
             "quantum-genesis":  {"gamma": 0.050, "rho": 0.90, "safe": True},

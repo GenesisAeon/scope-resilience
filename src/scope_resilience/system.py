@@ -69,7 +69,8 @@ class ScopeResilience(DiamondPackage):
         crep_comps = self._crep.compute(sigillin_ids, q4_transitions)
         gamma_sem = self._crep.gamma_sem(crep_comps)
         d_gamma = self._monitor.update(gamma_sem)
-        rho_sem = self._risk.compute_rho(gamma_sem, d_gamma_dt=d_gamma)
+        r_sem = SemanticCREP.get_domain_r(self.domain)
+        rho_sem = self._risk.compute_rho(gamma_sem, r_sem=r_sem, d_gamma_dt=d_gamma)
         risk_level, _ = self._risk.classify_risk(rho_sem)
         recs = self._grounder.recommend(
             SemanticPath(
@@ -158,7 +159,7 @@ class ScopeResilience(DiamondPackage):
 
     # ── Extended public API ──────────────────────────────────────────────────
 
-    def run_cycle(  # type: ignore[override]
+    def run_cycle(
         self,
         topic: str = "default",
         sigillin_ids: list[str] | None = None,

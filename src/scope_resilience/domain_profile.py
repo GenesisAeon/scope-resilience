@@ -10,6 +10,7 @@ Calibration formula (identical for physical and semantic domains):
 from __future__ import annotations
 
 import math
+from typing import Any
 
 
 class DomainProfile:
@@ -64,7 +65,7 @@ class DomainProfile:
             rho_atlas_target=rho_target,
         )
 
-    def as_dict(self) -> dict:
+    def as_dict(self) -> dict[str, Any]:
         return {
             "domain": self.domain,
             "gamma": self.gamma,

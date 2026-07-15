@@ -7,6 +7,8 @@ explicitly marked as estimates pending TIP/P49 calibration.
 
 from __future__ import annotations
 
+from typing import Any
+
 SIGMA: float = 2.2
 SIGMA_PHI: float = 1.0 / 16.0  # ≈ 0.0625 — Frame-Principle boundary
 GAMMA_MAX: float = 0.920        # ERA5 Arctic — most saturated known system
@@ -17,7 +19,7 @@ GAMMA_DOT_CRITICAL: float = 0.10  # critical semantic drift rate per step
 # All status="estimate" until P49/TIP delivers ≥30 perturbation pairs.
 # Calibration formula: r = Ρ_observed / (tanh²(σΓ) · (1 − Γ/Γ_max))
 
-DOMAIN_CONFIG: dict[str, dict] = {
+DOMAIN_CONFIG: dict[str, dict[str, Any]] = {
     "physics_dense": {
         "r_sem": 0.80,
         "status": "estimate",
@@ -67,7 +69,7 @@ RISK_LEVELS: dict[tuple[float, float], tuple[str, str]] = {
 }
 
 # ── Atlas reference calibration points ─────────────────────────────────────
-ATLAS_REFERENCES: dict[str, dict] = {
+ATLAS_REFERENCES: dict[str, dict[str, Any]] = {
     "amoc":        {"gamma": 0.251, "rho_target": 0.65, "r_required": 3.54},
     "arctic_era5": {"gamma": 0.920, "rho_target": 0.05, "r_required": 18.0},
     "sandpile":    {"gamma": 0.296, "rho_target": 0.75, "r_required": 3.0},
@@ -76,4 +78,4 @@ ATLAS_REFERENCES: dict[str, dict] = {
 
 # Populated lazily — see domain_profile.py for DomainProfile.from_atlas_target
 # to avoid circular imports at module load time.
-KNOWN_DOMAIN_PROFILES: dict = {}
+KNOWN_DOMAIN_PROFILES: dict[str, Any] = {}

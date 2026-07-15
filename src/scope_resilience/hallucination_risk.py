@@ -50,11 +50,16 @@ class HallucinationRisk:
         tanh_term = math.tanh(self.SIGMA * gamma_sem) ** 2
         crit_term = max(0.0, 1.0 - gamma_sem / self.GAMMA_MAX)
         drift_term = max(0.0, 1.0 - abs(d_gamma_dt) / self.GAMMA_DOT_CRITICAL)
-        return r * tanh_term * crit_term * drift_term
+        return float(r * tanh_term * crit_term * drift_term)
 
     def classify_risk(self, rho_sem: float) -> tuple[str, str]:
-        """Return (risk_level, message) for a given Ρ_sem."""
+        """Return (risk_level, message) for a given Ρ_sem.
+
+        Values above 1.0 are valid when calibrated r_sem > 1 — clamp to 1.0
+        before classification so they always resolve to "safe".
+        """
+        clamped = min(rho_sem, 1.0)
         for (low, high), (level, msg) in self.RISK_LEVELS.items():
-            if low <= rho_sem < high:
+            if low <= clamped < high:
                 return level, msg
-        return "critical", "Ρ_sem out of expected range."
+        return "safe", "Path is semantically stable. Proceed."

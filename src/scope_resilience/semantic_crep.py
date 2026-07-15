@@ -42,7 +42,7 @@ class SemanticCREP:
                 UserWarning,
                 stacklevel=3,
             )
-        return config["r_sem"]
+        return float(config["r_sem"])  # config values are float
 
     @classmethod
     def calibrate_r(
