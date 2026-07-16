@@ -1,10 +1,10 @@
 {
-  "title": "diamond-setup — P-INFRA-1: Universal Python project scaffold — generate professional project skeletons in seconds",
-  "description": "<p>Universal Python project scaffold — generate professional project skeletons in seconds.</p><p>Part of the <strong>GenesisAeon</strong> ecosystem (P-INFRA-1, domain: ecosystem infrastructure / template scaffold).</p><p>See <a href=\"https://github.com/GenesisAeon/diamond-setup\">github.com/GenesisAeon/diamond-setup</a> for source, documentation, and reproducibility notebooks.</p>",
+  "title": "scope-resilience — P41: Hallucination resilience mapping for LLM semantic paths",
+  "description": "<p>Extends <strong>genesis-scope</strong> with a formal pre-flight hallucination risk assessment (&#929;_sem) for LLM semantic paths.</p><p>&#929;_sem(P, t) = r_sem &middot; tanh&sup2;(&sigma; &middot; &Gamma;_sem(P)) &middot; (1 &minus; &Gamma;_sem(P)/&Gamma;_max) &middot; (1 &minus; |d&Gamma;_sem/dt| / &Gamma;&#775;_critical) applies the same UTAC fixpoint-resilience formalism used by resilience-core (P40) to LLM coherence maintenance: before initialising a model on a semantic topic path, quantify how resilient that path is against hallucination-driving semantic drift.</p><p>Implements all 6 GenesisAeon Diamond methods including <code>get_resilience_state()</code>, a domain-calibrated grounding recommender, live &Gamma;_sem drift monitoring, an optional MCP server, and the first GenesisAeon implementation of llms.txt export.</p><p>Domain r_sem values are a pre-registered hypothesis pending TIP/P49 calibration (&ge;30 perturbation-pair measurements per domain).</p><p>Part of the <strong>GenesisAeon</strong> ecosystem (P41, domain: LLM semantic coherence / hallucination resilience).</p><p>See <a href=\"https://github.com/GenesisAeon/scope-resilience\">github.com/GenesisAeon/scope-resilience</a> for source and documentation.</p>",
   "creators": [
     {
       "name": "Römer, Johann",
-      "affiliation": "Independent Researcher / MOR Research Collective"
+      "affiliation": "MOR Research Collective"
     }
   ],
   "license": "MIT",
@@ -12,11 +12,15 @@
   "access_right": "open",
   "keywords": [
     "GenesisAeon",
-    "P-INFRA-1",
-    "ecosystem infrastructure",
+    "P41",
+    "hallucination-resilience",
+    "LLM",
+    "semantic-drift",
     "UTAC",
     "CREP",
-    "open science"
+    "llms.txt",
+    "MCP",
+    "grounding"
   ],
   "related_identifiers": [
     {
@@ -26,7 +30,7 @@
       "scheme": "doi"
     }
   ],
-  "version": "2.1.0",
+  "version": "1.0.0",
   "communities": [
     {
       "identifier": "genesisaeon"
