@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "scope-resilience"
+version: "1.0.0"
+date-released: "2026-07-16"
+authors:
+  - name: "GenesisAeon"
+repository-code: "https://github.com/GenesisAeon/scope-resilience"
+license: MIT
+abstract: "GenesisAeon Package 41 — hallucination resilience mapping for LLM semantic paths (scope-resilience)"
+keywords:
+  - GenesisAeon
+  - UTAC
+  - CREP
+  - open-science
+  - hallucination-resilience
+  - LLM
+  - semantic-drift
+  - llms.txt
