@@ -56,6 +56,13 @@ DOMAIN_CONFIG: dict[str, dict[str, Any]] = {
         "calibration_source": "quantum-genesis analogy (Γ=0.050, Ρ≈0.90)",
         "notes": "Formal quantum physics — high coherence, slow drift",
     },
+    "ecology": {
+        "r_sem": 0.65,
+        "status": "estimate",
+        "calibration_source": "pending TIP/P49",
+        "notes": "Ecosystem/biodiversity literature — moderate self-correction, "
+                 "between sparse_fringe and physics_dense",
+    },
 }
 
 # ── Risk classification thresholds ─────────────────────────────────────────

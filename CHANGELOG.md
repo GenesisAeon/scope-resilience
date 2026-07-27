@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+- `ecology` domain to `DOMAIN_CONFIG` (r_sem=0.65, status="estimate"). Found
+  missing while running genesis-tip's `tip_scope_empirical_test_prompt.md`
+  proxy test, which assumed this domain existed — `ScopeResilience(domain=
+  "ecology")` previously fell back silently to `"general"` (r_sem=0.50) with
+  a `UserWarning`. See genesis-tip's `epistemic_status.md` (2026-07-28 entry)
+  for the full context.
+
 ## [1.0.0] - 2026-07-16
 ### Added
 - `ScopeResilience` — Diamond Interface main class implementing all 6
