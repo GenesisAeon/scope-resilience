@@ -22,6 +22,12 @@ from scope_resilience.llms_txt import LLMSTxtExporter
 from scope_resilience.path_monitor import PathDriftMonitor
 from scope_resilience.semantic_crep import SemanticCREP
 from scope_resilience.semantic_path import SemanticPath
+from scope_resilience.semantic_similarity import (
+    SimilarityCallable,
+    SimilarityError,
+    grok_similarity,
+    tfidf_similarity,
+)
 from scope_resilience.semantic_utac import SemanticUTAC
 from scope_resilience.system import ScopeResilience
 
@@ -43,6 +49,10 @@ __all__ = [
     "PathDriftMonitor",
     "SemanticCREP",
     "SemanticPath",
+    "SimilarityCallable",
+    "SimilarityError",
+    "grok_similarity",
+    "tfidf_similarity",
     "SemanticUTAC",
     "ScopeResilience",
     "__version__",

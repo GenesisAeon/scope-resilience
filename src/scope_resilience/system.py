@@ -21,6 +21,7 @@ from scope_resilience.llms_txt import LLMSTxtExporter
 from scope_resilience.path_monitor import PathDriftMonitor
 from scope_resilience.semantic_crep import SemanticCREP
 from scope_resilience.semantic_path import SemanticPath
+from scope_resilience.semantic_similarity import SimilarityCallable, tfidf_similarity
 from scope_resilience.semantic_utac import SemanticUTAC
 
 
@@ -57,6 +58,9 @@ class ScopeResilience(DiamondPackage):
         self._pending_topic: str = "default"
         self._pending_ids: list[str] = []
         self._pending_trans: list[tuple[str, str]] = []
+        self._pending_texts: list[str] | None = None
+        self._pending_reference_texts: list[str] | None = None
+        self._pending_similarity_fn: SimilarityCallable = tfidf_similarity
 
     # ── DiamondPackage hooks ─────────────────────────────────────────────────
 
@@ -66,10 +70,24 @@ class ScopeResilience(DiamondPackage):
         sigillin_ids = self._pending_ids
         q4_transitions = self._pending_trans
 
-        crep_comps = self._crep.compute(sigillin_ids, q4_transitions)
+        r_sem = SemanticCREP.get_domain_r(self.domain)
+        if self._pending_texts is not None:
+            # Real, content-based measurement (see semantic_similarity.py):
+            # only used when the caller actually supplied real segment text.
+            crep_comps = self._crep.compute_from_content(
+                self._pending_texts,
+                reference_texts=self._pending_reference_texts,
+                similarity_fn=self._pending_similarity_fn,
+            )
+            if "R" not in crep_comps:
+                # No reference_texts supplied - no real ground-truth to
+                # measure proximity against, fall back to the domain
+                # structural default rather than inventing a value.
+                crep_comps["R"] = r_sem
+        else:
+            crep_comps = self._crep.compute(sigillin_ids, q4_transitions)
         gamma_sem = self._crep.gamma_sem(crep_comps)
         d_gamma = self._monitor.update(gamma_sem)
-        r_sem = SemanticCREP.get_domain_r(self.domain)
         rho_sem = self._risk.compute_rho(gamma_sem, r_sem=r_sem, d_gamma_dt=d_gamma)
         risk_level, _ = self._risk.classify_risk(rho_sem)
         recs = self._grounder.recommend(
@@ -164,11 +182,25 @@ class ScopeResilience(DiamondPackage):
         topic: str = "default",
         sigillin_ids: list[str] | None = None,
         q4_transitions: list[tuple[str, str]] | None = None,
+        segment_texts: list[str] | None = None,
+        reference_texts: list[str] | None = None,
+        similarity_fn: SimilarityCallable = tfidf_similarity,
     ) -> dict[str, Any]:
-        """Override to expose topic/sigillin_ids/q4_transitions as keyword args."""
+        """Override to expose topic/sigillin_ids/q4_transitions as keyword args.
+
+        ``segment_texts``: optional real text content for each path segment
+        (see ``semantic_crep.SemanticCREP.compute_from_content``). When
+        given, CREP is computed from real content-based similarity instead
+        of the structural id/transition proxy - the "real semantic-drift
+        measurement" path. ``reference_texts`` and ``similarity_fn`` are
+        only meaningful together with ``segment_texts``.
+        """
         self._pending_topic = topic
         self._pending_ids = sigillin_ids or []
         self._pending_trans = q4_transitions or []
+        self._pending_texts = segment_texts
+        self._pending_reference_texts = reference_texts
+        self._pending_similarity_fn = similarity_fn
         return super().run_cycle()
 
     def get_resilience_state(self) -> dict[str, Any]:
