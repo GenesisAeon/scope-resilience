@@ -15,6 +15,7 @@ from diamond_setup.protocol import (
     ZenodoCreator,
     ZenodoRecord,
 )
+
 from scope_resilience.grounding import GroundingRecommender
 from scope_resilience.hallucination_risk import HallucinationRisk
 from scope_resilience.llms_txt import LLMSTxtExporter
@@ -25,7 +26,7 @@ from scope_resilience.semantic_similarity import SimilarityCallable, tfidf_simil
 from scope_resilience.semantic_utac import SemanticUTAC
 
 
-class ScopeResilience(DiamondPackage):
+class ScopeResilience(DiamondPackage):  # type: ignore[misc]
     """GenesisAeon Diamond interface for semantic hallucination resilience.
 
     Maps the UTAC system-resilience formalism onto LLM semantic paths,
@@ -201,7 +202,7 @@ class ScopeResilience(DiamondPackage):
         self._pending_texts = segment_texts
         self._pending_reference_texts = reference_texts
         self._pending_similarity_fn = similarity_fn
-        return super().run_cycle()
+        return super().run_cycle()  # type: ignore[no-any-return]
 
     def get_resilience_state(self) -> dict[str, Any]:
         """6th Diamond method — semantic resilience details.

@@ -151,10 +151,10 @@ class SemanticCREP:
         """
         n = len(segment_texts)
         if n == 0:
-            result: dict[str, float] = {"C": 0.5, "E": 0.5, "P": 0.2}
+            empty_result: dict[str, float] = {"C": 0.5, "E": 0.5, "P": 0.2}
             if reference_texts:
-                result["R"] = 0.5
-            return result
+                empty_result["R"] = 0.5
+            return empty_result
 
         if n < 2:
             c_sem = 0.5

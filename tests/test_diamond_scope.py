@@ -1,9 +1,9 @@
 """Diamond interface compliance tests for ScopeResilience."""
 
 import pytest
-
 from diamond_setup.protocol import NotConvergedError
 from diamond_setup.validation import validate_diamond_instance
+
 from scope_resilience.system import ScopeResilience
 
 
