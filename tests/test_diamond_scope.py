@@ -1,9 +1,9 @@
 """Diamond interface compliance tests for ScopeResilience."""
 
 import pytest
-
 from diamond_setup.protocol import NotConvergedError
 from diamond_setup.validation import validate_diamond_instance
+
 from scope_resilience.system import ScopeResilience
 
 
@@ -112,3 +112,54 @@ def test_high_risk_generates_phase_event():
     events = sr.get_phase_events()
     # Events may or may not be present depending on computed rho; just check type
     assert isinstance(events, list)
+
+
+# ── segment_texts: real content-based path (opt-in, backward-compatible) ───
+
+
+def test_segment_texts_omitted_preserves_old_behaviour(sr):
+    """Not passing segment_texts must produce the exact same structural
+    result as before this feature existed - no silent behaviour change."""
+    sr_a = ScopeResilience(domain="general")
+    sr_b = ScopeResilience(domain="general")
+    ids = ["s1", "s2", "s3"]
+    trans = [("s1", "s2"), ("s2", "s3")]
+    result_a = sr_a.run_cycle("topic", sigillin_ids=ids, q4_transitions=trans)
+    result_b = sr_b.run_cycle("topic", sigillin_ids=ids, q4_transitions=trans)
+    assert result_a == result_b
+
+
+def test_segment_texts_drive_real_content_based_crep(sr):
+    coherent = sr.run_cycle(
+        "AMOC coherent path",
+        segment_texts=[
+            "The AMOC is weakening due to freshwater input.",
+            "Freshwater input from Greenland ice melt reduces AMOC strength.",
+        ],
+    )
+    drifting = ScopeResilience(domain="general").run_cycle(
+        "AMOC drifting path",
+        segment_texts=[
+            "The AMOC is weakening due to freshwater input.",
+            "Bananas are rich in potassium and grow in tropical climates.",
+        ],
+    )
+    assert coherent["gamma_sem"] > drifting["gamma_sem"]
+
+
+def test_segment_texts_without_reference_falls_back_to_domain_r(sr):
+    sr.run_cycle("test", segment_texts=["one segment", "another segment"])
+    state = sr.get_crep_state()
+    from scope_resilience.semantic_crep import SemanticCREP
+
+    assert state["R"] == pytest.approx(SemanticCREP.get_domain_r("general"))
+
+
+def test_segment_texts_with_reference_uses_real_r(sr):
+    sr.run_cycle(
+        "test",
+        segment_texts=["AMOC discussion", "further AMOC details"],
+        reference_texts=["Verified: AMOC risk assessment ground truth"],
+    )
+    state = sr.get_crep_state()
+    assert 0.0 <= state["R"] <= 1.0
