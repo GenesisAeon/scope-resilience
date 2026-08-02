@@ -86,14 +86,14 @@ When risk rises, `GroundingRecommender` suggests concrete mitigations: injecting
 
 | Domain | r_sem | Status | Source |
 |---|---|---|---|
-| `curated_graph` | 0.90 | estimate | pending TIP/P49 |
-| `physics_dense` | 0.80 | estimate | pending TIP/P49 |
+| `curated_graph` | 0.90 | estimate | pending TIP/P50 |
+| `physics_dense` | 0.80 | estimate | pending TIP/P50 |
 | `quantum` | 0.85 | estimate | quantum-genesis analogy (Γ=0.050, Ρ≈0.90) |
 | `oceanography` | 0.75 | estimate | AMOC-UTAC analogy |
 | `general` | 0.50 | conservative_default | theoretical midpoint |
-| `sparse_fringe` | 0.30 | estimate | pending TIP/P49 |
+| `sparse_fringe` | 0.30 | estimate | pending TIP/P50 |
 
-**All `r_sem` values are provisional.** They hold as a **pre-registered hypothesis** until the TIP/P49 calibration effort delivers ≥30 real perturbation-pair measurements per domain. `SemanticCREP.get_domain_r()` raises a `UserWarning` on every use of an uncalibrated domain so this is never silently forgotten. Once real data lands, `SemanticCREP.calibrate_r(rho_observed, gamma)` recomputes `r_sem` from measured Ρ and Γ using the same closed-form inversion `resilience-core` uses for physical domains.
+**All `r_sem` values are provisional.** They hold as a **pre-registered hypothesis** until the TIP/P50 calibration effort delivers ≥30 real perturbation-pair measurements per domain. `SemanticCREP.get_domain_r()` raises a `UserWarning` on every use of an uncalibrated domain so this is never silently forgotten. Once real data lands, `SemanticCREP.calibrate_r(rho_observed, gamma)` recomputes `r_sem` from measured Ρ and Γ using the same closed-form inversion `resilience-core` uses for physical domains.
 
 ## Diamond Interface
 

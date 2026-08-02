@@ -2,7 +2,7 @@
 
 Universal structural constants (σ, σ_Φ, Γ_max, Γ̇_critical) are fixed across
 all domains. Domain-specific r_sem values live in DOMAIN_CONFIG and are
-explicitly marked as estimates pending TIP/P49 calibration.
+explicitly marked as estimates pending TIP/P50 calibration.
 """
 
 from __future__ import annotations
@@ -16,26 +16,26 @@ GAMMA_DOT_CRITICAL: float = 0.10  # critical semantic drift rate per step
 
 # ── Domain r_sem configuration ──────────────────────────────────────────────
 # Structure is universal; values are domain-specific.
-# All status="estimate" until P49/TIP delivers ≥30 perturbation pairs.
+# All status="estimate" until P50/TIP delivers ≥30 perturbation pairs.
 # Calibration formula: r = Ρ_observed / (tanh²(σΓ) · (1 − Γ/Γ_max))
 
 DOMAIN_CONFIG: dict[str, dict[str, Any]] = {
     "physics_dense": {
         "r_sem": 0.80,
         "status": "estimate",
-        "calibration_source": "pending TIP/P49",
+        "calibration_source": "pending TIP/P50",
         "notes": "Dense physics literature, fast self-correction expected",
     },
     "sparse_fringe": {
         "r_sem": 0.30,
         "status": "estimate",
-        "calibration_source": "pending TIP/P49",
+        "calibration_source": "pending TIP/P50",
         "notes": "Sparse/speculative domains, slow self-correction",
     },
     "curated_graph": {
         "r_sem": 0.90,
         "status": "estimate",
-        "calibration_source": "pending TIP/P49",
+        "calibration_source": "pending TIP/P50",
         "notes": "Dense curated knowledge graphs, strongest attractor",
     },
     "general": {

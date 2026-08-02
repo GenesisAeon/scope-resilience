@@ -11,7 +11,7 @@ KNOWN_DOMAIN_PROFILES: dict[str, DomainProfile] = {
     "arctic_era5": DomainProfile.from_atlas_target("arctic",  0.920, 0.05),
     "sandpile":    DomainProfile.from_atlas_target("sandpile", 0.296, 0.75),
     "quantum":     DomainProfile.from_atlas_target("quantum",  0.050, 0.90),
-    # Semantic domains — pending P49/TIP calibration
+    # Semantic domains — pending P50/TIP calibration
     "llm_physics": DomainProfile(
         "llm_physics", gamma=0.65, r=2.5,
         r_status="estimated", r_source="expert estimate, pending TIP",
