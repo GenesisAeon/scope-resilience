@@ -31,7 +31,7 @@ from scope_resilience.semantic_similarity import (
 from scope_resilience.semantic_utac import SemanticUTAC
 from scope_resilience.system import ScopeResilience
 
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 __author__ = "GenesisAeon"
 
 __all__ = [

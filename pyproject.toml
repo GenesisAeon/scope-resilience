@@ -1,6 +1,6 @@
 [project]
 name = "scope-resilience"
-version = "1.0.1"
+version = "1.0.2"
 description = "GenesisAeon Package 41 — hallucination resilience mapping for LLM semantic paths (scope-resilience)"
 readme = "README.md"
 license = { text = "MIT" }

@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.0.2] - 2026-09-15
+
+### Fixed (test suite only, no behavior change)
+- Removed `tests/test_preset.py`, `tests/test_validator.py`,
+  `tests/test_protocol.py`: unmodified copies of `diamond-setup`'s own
+  test suite, exercising only `diamond_setup` internals, never
+  `scope-resilience` code.
+- `tests/test_cli.py` replaced with real tests against
+  `scope_resilience/_cli.py` (`serve`/`assess`/`export-llms-txt`/`path`),
+  previously a copy of diamond-setup's CLI tests with 0% actual coverage
+  of this package's own CLI.
+
 ## [1.0.1] - 2026-09-15
 
 ### Fixed (documentation only, no behavior change)
